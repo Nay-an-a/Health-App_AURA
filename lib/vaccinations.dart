@@ -1,14 +1,11 @@
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-
 
 class VaccRep extends StatefulWidget {
   VaccRep({Key? key}) : super(key: key);
   _VaccRep createState() => _VaccRep();
 }
-
 
 class _VaccRep extends State<VaccRep> {
   List<File> images = [];
@@ -29,7 +26,6 @@ class _VaccRep extends State<VaccRep> {
     );
   }
 
-
   void previousImage() {
     if (_currentIndex > 0) {
       setState(() {
@@ -40,17 +36,16 @@ class _VaccRep extends State<VaccRep> {
         duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
   }
 
-
   Future<void> _uploadResults() async {
     final ImagePicker _picker = ImagePicker();
     final XFile? pickedFile =
-    await _picker.pickImage(source: ImageSource.gallery);
+        await _picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       setState(() {
         titles.add(_textEditingController.text);
         _textEditingController.clear();
         images.add(File(pickedFile.path));
-        _currentIndex=images.length-1;
+        _currentIndex = images.length - 1;
       });
       _pageController.animateToPage(
         _currentIndex,
@@ -60,28 +55,27 @@ class _VaccRep extends State<VaccRep> {
     }
   }
 
-
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.blue,
-          leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(Icons.arrow_back_ios, color: Colors.white)),
-          title: Text("Vaccination Details", style: TextStyle(color: Colors.white)),
-        ),
-        body:Expanded(child:  Column(
-
-
+      appBar: AppBar(
+        backgroundColor: Colors.blue,
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.arrow_back_ios, color: Colors.white)),
+        title:
+            Text("Vaccination Details", style: TextStyle(color: Colors.white)),
+      ),
+      body: Expanded(
+        child: Column(
           children: [
             Padding(
                 padding: EdgeInsets.all(10),
                 child: TextField(
                   controller: _textEditingController,
-                  decoration:
-                  InputDecoration(labelText: "Enter name of vaccination document "),
+                  decoration: InputDecoration(
+                      labelText: "Enter name of vaccination document "),
                 )),
             Padding(
                 padding: EdgeInsets.all(10),
@@ -89,8 +83,8 @@ class _VaccRep extends State<VaccRep> {
                   onPressed: () {
                     if (_textEditingController.text.isEmpty) {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content:
-                        Text("Enter a name of the vaccination document to be submitted"),
+                        content: Text(
+                            "Enter a name of the vaccination document to be submitted"),
                       ));
                     } else {
                       _uploadResults();
@@ -103,47 +97,44 @@ class _VaccRep extends State<VaccRep> {
                 )),
             images.isEmpty || titles.isEmpty
                 ? Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [Center(child: Text("No documents found"))],
-                ))
-                :
-            Expanded(
-                child: Padding(
-                    padding: EdgeInsets.all(50),
-                    child:
-                    PageView.builder(
-                        controller: _pageController,
-                        itemCount: images.length,
-                        onPageChanged: (index) {
-                          setState(() {
-                            _currentIndex = index;
-                          });
-                        },
-                        itemBuilder: (context, index) {
-                          return SingleChildScrollView(child:Column(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.all(15),
-                                child: Text("${titles[index]}",
-                                    style: TextStyle(
-                                        fontSize: 25)),
+                    child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [Center(child: Text("No documents found"))],
+                  ))
+                : Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.all(50),
+                      child: PageView.builder(
+                          controller: _pageController,
+                          itemCount: images.length,
+                          onPageChanged: (index) {
+                            setState(() {
+                              _currentIndex = index;
+                            });
+                          },
+                          itemBuilder: (context, index) {
+                            return SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.all(15),
+                                    child: Text("${titles[index]}",
+                                        style: TextStyle(fontSize: 25)),
+                                  ),
+                                  Image.file(
+                                    images[index],
+                                    fit: BoxFit.fill,
+                                  ),
+                                ],
                               ),
-                              Image.file(
-                                images[index],
-                                fit: BoxFit.fill,
-                              )
-                              ,
-                            ],
-                          ) );
-                        }))),
-
-
+                            );
+                          }),
+                    ),
+                  ),
           ],
-        )));
+        ),
+      ),
+    );
   }
 }
-
-
-

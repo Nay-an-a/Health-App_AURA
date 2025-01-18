@@ -31,7 +31,6 @@ class Profile extends StatelessWidget {
               backgroundColor: Colors.blueGrey,
               child: Icon(Icons.person, size: 40, color: Colors.white54),
               radius: 50,
-              // Set the size of the avatar
             ),
           ),
           SizedBox(height: 20),

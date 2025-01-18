@@ -19,15 +19,6 @@ class DoctorSp extends StatelessWidget {
             },
           ),
           backgroundColor: Colors.blue,
-          /*//title:Text("Search",textAlign: TextAlign.center,style:TextStyle(color:Colors.white,),)
-         ,actions:[ IconButton(
-          onPressed: ()
-      {
-      Navigator.of(context).push(MaterialPageRoute(builder:(context)=>SearchPage()));
-      },
-      icon:const Icon(Icons.search,color:Colors.white),
-      ),
-  ],*/
         ),
         body: Padding(
             padding: EdgeInsets.all(10),
@@ -112,13 +103,12 @@ class DoctorSp extends StatelessWidget {
 
                     Text(" General\nMedicine",
                         style: TextStyle(color: Colors.white))
-                  ]),
+                  ],),
                 ),
                 SizedBox(width:MediaQuery.of(context).size.width*0.00000001),
-              ])
-            ])
-    )
-
+              ],),
+            ],),
+    ),
     );
   }
 }

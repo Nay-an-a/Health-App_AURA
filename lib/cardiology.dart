@@ -1,4 +1,3 @@
-//get code from google docs :: saved a Untitled document
 import 'package:flutter/material.dart';
 import 'package:new_project/searchUtil.dart';
 import 'package:new_project/info.dart';
@@ -56,7 +55,7 @@ class _Cardiology extends State<Cardiology> {
   @override
   void initState() {
     super.initState();
-    filteredDoctors = doctors; //Initially all doctors are displayed
+    filteredDoctors = doctors;
   }
 
   void updateSearchQuery(String query) {

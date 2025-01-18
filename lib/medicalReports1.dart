@@ -1,14 +1,11 @@
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-
 
 class MedRep extends StatefulWidget {
   MedRep({Key? key}) : super(key: key);
   _MedRep createState() => _MedRep();
 }
-
 
 class _MedRep extends State<MedRep> {
   List<File> images = [];
@@ -29,7 +26,6 @@ class _MedRep extends State<MedRep> {
     );
   }
 
-
   void previousImage() {
     if (_currentIndex > 0) {
       setState(() {
@@ -40,17 +36,16 @@ class _MedRep extends State<MedRep> {
         duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
   }
 
-
   Future<void> _uploadResults() async {
     final ImagePicker _picker = ImagePicker();
     final XFile? pickedFile =
-    await _picker.pickImage(source: ImageSource.gallery);
+        await _picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       setState(() {
         titles.add(_textEditingController.text);
         _textEditingController.clear();
         images.add(File(pickedFile.path));
-        _currentIndex=images.length-1;
+        _currentIndex = images.length - 1;
       });
       _pageController.animateToPage(
         _currentIndex,
@@ -59,7 +54,6 @@ class _MedRep extends State<MedRep> {
       );
     }
   }
-
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,16 +66,15 @@ class _MedRep extends State<MedRep> {
               icon: Icon(Icons.arrow_back_ios, color: Colors.white)),
           title: Text("Medical Reports", style: TextStyle(color: Colors.white)),
         ),
-        body:Expanded(child:  Column(
-
-
+        body: Expanded(
+            child: Column(
           children: [
             Padding(
                 padding: EdgeInsets.all(10),
                 child: TextField(
                   controller: _textEditingController,
                   decoration:
-                  InputDecoration(labelText: "Enter name of report "),
+                      InputDecoration(labelText: "Enter name of report "),
                 )),
             Padding(
                 padding: EdgeInsets.all(10),
@@ -90,7 +83,7 @@ class _MedRep extends State<MedRep> {
                     if (_textEditingController.text.isEmpty) {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content:
-                        Text("Enter a name for the report to be submitted"),
+                            Text("Enter a name for the report to be submitted"),
                       ));
                     } else {
                       _uploadResults();
@@ -103,47 +96,39 @@ class _MedRep extends State<MedRep> {
                 )),
             images.isEmpty || titles.isEmpty
                 ? Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [Center(child: Text("No medical reports found"))],
-                ))
-                :
-            Expanded(
-                child: Padding(
-                    padding: EdgeInsets.all(50),
-                    child:
-                    PageView.builder(
-                        controller: _pageController,
-                        itemCount: images.length,
-                        onPageChanged: (index) {
-                          setState(() {
-                            _currentIndex = index;
-                          });
-                        },
-                        itemBuilder: (context, index) {
-                          return SingleChildScrollView(child:Column(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.all(15),
-                                child: Text("${titles[index]}",
-                                    style: TextStyle(
-                                        fontSize: 25)),
-                              ),
-                              Image.file(
-                                images[index],
-                                fit: BoxFit.fill,
-                              )
-                              ,
-                            ],
-                          ) );
-                        }))),
-
-
+                    child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [Center(child: Text("No medical reports found"))],
+                  ))
+                : Expanded(
+                    child: Padding(
+                        padding: EdgeInsets.all(50),
+                        child: PageView.builder(
+                            controller: _pageController,
+                            itemCount: images.length,
+                            onPageChanged: (index) {
+                              setState(() {
+                                _currentIndex = index;
+                              });
+                            },
+                            itemBuilder: (context, index) {
+                              return SingleChildScrollView(
+                                  child: Column(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.all(15),
+                                    child: Text("${titles[index]}",
+                                        style: TextStyle(fontSize: 25)),
+                                  ),
+                                  Image.file(
+                                    images[index],
+                                    fit: BoxFit.fill,
+                                  ),
+                                ],
+                              ));
+                            }))),
           ],
         )));
   }
 }
-
-
-

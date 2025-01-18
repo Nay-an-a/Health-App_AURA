@@ -150,6 +150,5 @@ class _SignUp extends State<SignUp> {
         ),
       ),
     );
-
   }
 }

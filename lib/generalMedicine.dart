@@ -1,4 +1,3 @@
-//get code from google docs :: saved a Untitled document
 import 'package:flutter/material.dart';
 import 'package:new_project/searchUtil.dart';
 import 'package:new_project/info.dart';

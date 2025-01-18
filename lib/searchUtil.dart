@@ -1,5 +1,4 @@
 class SearchUtil {
-  // Generic search method
   static List<Map<String, String>> searchItems(
       List<Map<String, String>> items,
       String query,
