@@ -1,0 +1,1 @@
+ C:\\Users\\nena\\StudioProjects\\new_project\\.dart_tool\\flutter_build\\3b80da04041a10bebd549f0d67a09739\\native_assets.yaml: 
