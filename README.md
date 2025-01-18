@@ -1,4 +1,4 @@
-# new_project
+# Aura
 
 A new Flutter project.
 
