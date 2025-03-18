@@ -1,6 +1,7 @@
 # Aura
 
 A new Flutter project.
+PS:For dart code check lib file
 
 ## Getting Started
 
